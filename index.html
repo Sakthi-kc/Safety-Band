@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial=1.0">
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+		
+		body{
+			margin: 0;
+			padding: 0;
+			background-image: url(sh.jpg);
+			background-size: contain;
+			background-repeat: no-repeat;
+			height: auto;
+			max-width: 100%;
+ 			max-height: 100%;
+ 			height: 1000px;
+			font-family: 'Patrick Hand', cursive;
+    		font-size: 26px;
+		}
+		.login{
+			height: 200px;
+			width: 300px;
+			margin: auto;
+			padding: 20px 0 20px 0;
+			color: white;
+			font-family: 'Patrick Hand', cursive;
+		}
+		.login h1{
+			text-align: center;
+			color: #4d4d4d;
+			font-size: 24px;
+			font-family: 'Patrick Hand', cursive;
+			padding: 20px 0 20px 0;
+		}
+		.login input[type="text"],
+		.login input[type="password"]{
+			width: 100%;
+			padding: 18px;
+			border-bottom: 2px solid #dddddd;
+			font-family: 'Patrick Hand', cursive;
+			outline: none;
+			margin-bottom: 15px;
+			box-sizing: border-box;
+		}
+		.login input[type="tel"]{
+			width: 100%;
+			padding: 18px;
+			border-bottom: 2px solid #dddddd;
+			outline: none;
+			margin-bottom: 15px;
+			box-sizing: border-box;
+		}
+		.login button{
+			width: 30%;
+			border-radius: 5px;
+			position: relative;
+			padding: 15px;
+			background-color: #535b63;
+			border: 0;
+			margin-left: 30%;
+			box-sizing: border-box;
+			cursor: pointer;
+			font-weight: bold;
+			color: #ffffff;
+
+		}
+		#wrapper{
+    		height: 50;
+    		margin-top: 25px;
+    		margin-left: 540px;
+  }
+
+	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<img src="me.jpg" width="32%">
+	</div>
+	
+	<div class="login">
+			
+		<form name="myForm" action="loc.html" method="POST" onsubmit="return validate()">
+			<input type="text" id="uname" name="Username" placeholder="Enter your name" required>
+			<input type="password" id="pass" name="Password" placeholder="Password-6 characters" required>
+			<input type="tel" name="Phone" id="phn" placeholder="Emergency Num 1" pattern="[0-9]{10}" required>
+			<input type="tel" name="Phone" id="phn1" placeholder="Emergency Num 2" pattern="[0-9]{10}" required>
+			<input type="tel" name="Phone" id="phn2" placeholder="ENTER POLICE NUM (100)" pattern="[1]{1}[0]{2}" required>
+			<button id="butt1"onclick="return validate()">Register</button>
+		</form>
+	</div>
+	<style >
+		#butt1{
+			background-color: #82BF56;
+			border-bottom: 5px solid #669644;
+			text-shadow: 0px -2px #669644;
+			font-family: 'Pacifico', cursive;
+			position: relative;
+			/*padding: 10px 40px;*/
+  			/*margin: 10px 10px 10px 0px;*/
+  			/*float: center;
+			border-radius: 10px;
+			font-family: 'Pacifico', cursive;
+			font-size: 25px;
+			color: #FFF;
+			text-decoration: none;
+			border-width: 10px;*/
+
+		}
+
+
+
+		#uname{
+			border-radius: 25px;
+  			background: white;
+  			padding: 20px;
+  			width: 320px;
+  			height: 30px;
+		}
+		#pass{
+			border-radius: 25px;
+  			background: white;
+  			padding: 20px;
+  			width: 320px;
+  			height: 30px;
+		}
+		#phn{
+			border-radius: 25px;
+  			background: white;
+  			padding: 20px;
+  			width: 320px;
+  			height: 30px;
+		}
+		#phn1{
+			border-radius: 25px;
+  			background: white;
+  			padding: 20px;
+  			width: 320px;
+  			height: 30px;
+		}
+		#phn2{
+			border-radius: 25px;
+  			background: white;
+  			padding: 20px;
+  			width: 320px;
+  			height: 30px;
+		}
+	</style>
+	<p id="demo"></p>
+	<script >	
+		var x = document.getElementById("demo");
+		const database=firebase.database();
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.innerHTML = "Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude;
+}
+var x = document.getElementById("demo");
+
+
+var c=function(pos){
+      var lat=pos.coords.latitude;
+          long=pos.coords.longitude;
+          coords=lat + ',' + long;
+
+       document.getElementById('google_map').setAttribute('src','maps.google.co.uk?q=demo'+ coords +'&z=60&output=embed')
+    }
+    document.getElementById('get_location').onclick=function{
+      navigator.geolocation.getCurrentLocation(c);
+      return false;
+    }
+
+    // addBtn.addEventListener('click',(e) =>{
+    // 	e.preventDefault();
+    // 	database.set({
+    // 		uname
+    // 	})
+    // })
+	</script>
+ 
+
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="/__/firebase/7.7.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="/__/firebase/7.7.0/firebase-analytics.js"></script>
+
+<!-- Initialize Firebase -->
+<script src="/__/firebase/init.js"></script>
+
+</body>
+</html>
