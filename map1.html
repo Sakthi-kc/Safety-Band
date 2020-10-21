@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <body>
-
+<meta name="viewport" content="width=device-width,initial=1.0">
 <title>Location</title>
-<!-- h1>Check coordinates of live location</h1> -->
-
-<!-- <button onclick="getLocation()">Try It</button> -->
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <button onclick="getLocation()" id="abcd" class="learn-more">Check Location</button>
-
 <style >
  @import url("https://fonts.googleapis.com/css?family=Rubik:700&display=swap");
 * {
@@ -21,7 +18,6 @@
 }
 #abcd{
   background-image: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%);
-  
 }
 body {
   font-family: 'Rubik', sans-serif;
@@ -117,37 +113,20 @@ function getLocation() {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
-
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude + 
-  "<br>Longitude: " + position.coords.longitude;
+  var lat = position.coords.latitude;
+  var long = position.coords.longitude;
+  x.innerHTML = "Latitude: " + lat + 
+  "<br>Longitude: " + long;
+  $.ajax({
+        type:"POST",
+        url:"demo.php",
+        data:{lat:lat,long:long},
+        success:function(result){
+        $("#content").html(result);
+        }
+  });
 }
-function showError(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      x.innerHTML = "User denied the request for Geolocation."
-      break;
-    case error.POSITION_UNAVAILABLE:
-      x.innerHTML = "Location information is unavailable."
-      break;
-    case error.TIMEOUT:
-      x.innerHTML = "The request to get user location timed out."
-      break;
-    case error.UNKNOWN_ERROR:
-      x.innerHTML = "An unknown error occurred."
-      break;
-  }
-}
-// function showPosition(position) {
-//   var latlon = position.coords.latitude + "," + position.coords.longitude;
-
-  
-//  var img_url = "https://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false&key=AIzaSyCKd_LCgWjI6pbJegDhDG_EopK2hMMOMWs";
-
-
-//   document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
-// }
 </script>
-
 </body>
 </html>
